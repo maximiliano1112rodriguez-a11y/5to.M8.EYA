@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<cabeza>
+    <meta conjunto de caracteres=„UTF-8">
+    <meta nombre="ventana gráfica" contenido="ancho=ancho del dispositivo, escala inicial=1.0">
+    <título>EduPaz - Portal de Convivencia</título>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&mostrar=intercambiar" rel="hoja de estilo">
+    <estilo>
+        :raíz {
+            --rosa-primaria: #ec4899;
+            --rosa-suave: #fb7185;
+            --bg-principal: #FFF5F7;
+        }
+        cuerpo { 
+            familia de fuentes: 'Nunito', sans-serif; 
+            color de fondo: var(--bg-principal);
+            margen: 0;
+            desbordamiento-x: oculto;
+        }
+        .gradiente rosa { fondo: gradiente lineal(135deg, var(--rosa-primaria) 0%, var(--rosa-suave) 100%); }
+        .vidrio { fondo: rgba(255, 255, 255, 0,9); filtro de fondo: desenfocar(10px); }
+        .tarjeta opción {
+            transición: todos 0,2s cúbico-bézier(0,4, 0, 0,2, 1);
+            cursor: puntero;
+        }
+        .tarjeta opción:hover {
+            transformar: traducirY(-2px);
+            color del borde: var(--rosa-primaria);
+            color de fondo: blanco;
+        }
+        .tarjeta opción:activo { transformar: escala(0,98); }
+        
+        .desvanecerse { animación: fadeIn 0,5s easy-out hacia adelante; }
+        @keyframes fadeIn {
+            desde { opacidad: 0; transformar: traducirY(15px); }
+            to { opacidad: 1; transformar: traducirY(0); }
+        }
+        
+        .vista oculta { visualizar: ninguno !importante; }
+        #barra de progreso { transición: ancho 0,6s cúbico-bézier(0,65, 0, 0,35, 1); }
+    </estilo>
+</cabeza>
+<cuerpo clase="text-pink-900 min-h-screen flex flex-col">
+
+    <!-- Navegación -->
+    <nav clase="p-4 pegajoso top-0 z-50">
+        <div clase="max-w-4xl mx-auto borde de vidrio borde-rosa-100 redondeado-[2rem] px-6 py-4 flex elementos-centro justificar-entre sombra-lg sombra-rosa-100/30">
+            <div clase="flexionar elementos-espacio central-2" onclick="ubicación.reload()" estilo="cursor: puntero;>
+                <div clase="w-10 h-10 elemento flexible redondeado de gradiente rosa-centro justificar-centro texto-sombra blanca-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" ancho="20" altura="20" viewBox="0 0 24 24" llenar="ninguno" accidente cerebrovascular="Color actual" ancho de trazo="3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <span clase="font-black text-2xl text-pink-600 tracking-tighter cursiva">Edu<span clase="text-rose-400">Paz</span></span>
+            </div>
+            
+            <botón onclick="alternar créditos()" clase="flex items-center gap-2 px-4 py-2 bg-pink-50 hover:bg-pink-100 text-pink-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-pink-100 transition-colors">
+ 👤 Autores
+            </botón>
+        </div>
+    </nav>
+
+    <!-- Modal de Autores -->
+    <div id="credits-modal" class="hidden-view fixed inset-0 z-[60] flex items-center justify-center px-6">
+        <div class="absolute inset-0 bg-pink-900/20 backdrop-blur-sm" onclick="toggleCredits()"></div>
+        <div class="relative bg-white p-8 rounded-[2.5rem] shadow-2xl border border-pink-100 max-w-sm w-full text-center fade-in">
+            <div class="w-16 h-16 pink-gradient rounded-full flex items-center justify-center text-white mx-auto mb-4 text-2xl shadow-lg shadow-pink-200">✍️</div>
+            <h4 class="text-pink-400 font-black uppercase tracking-widest text-[10px] mb-4">Créditos del Proyecto</h4>
+            <div class="space-y-1">
+                <p class="text-4xl font-black text-transparent bg-clip-text pink-gradient italic tracking-tighter">5to EYA</p>
+                <div class="h-1 w-12 pink-gradient mx-auto rounded-full mb-2 opacity-50"></div>
+                <p class="text-slate-500 font-bold text-sm uppercase tracking-wide">en conjunto a la</p>
+                <p class="text-slate-800 font-black text-lg">Profesora de Contabilidad</p>
+            </div>
+            <button onclick="toggleCredits()" class="mt-8 px-6 py-2 bg-slate-50 text-slate-400 font-black text-xs rounded-full hover:bg-pink-50 hover:text-pink-500 transition-all border border-slate-100">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <main class="max-w-4xl mx-auto px-6 py-8 flex-grow flex flex-col justify-center w-full">
+        
+        <!-- PANTALLA 1: INICIO -->
+        <section id="view-inicio" class="text-center fade-in">
+            <div class="inline-flex items-center gap-2 px-5 py-2 bg-white text-pink-500 rounded-full text-xs font-black uppercase tracking-widest mb-8 shadow-sm border border-pink-50">
+                🛡️ Diagnóstico Anónimo y Seguro
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-6 leading-tight">
+                Tu opinión <br>
+                <span class="text-transparent bg-clip-text pink-gradient" style="-webkit-background-clip: text; color: transparent;">nos hace mejores.</span>
+            </h1>
+            <p class="text-xl text-pink-800/60 mb-12 max-w-2xl mx-auto font-bold leading-relaxed">
+                Este diagnóstico nos permite entender la convivencia escolar. 
+                Tus respuestas se procesan de forma privada para mejorar nuestra institución.
+            </p>
+            <button id="btn-start" onclick="startSurvey()" class="px-14 py-6 pink-gradient text-white rounded-[2.5rem] font-black text-2xl hover:scale-105 transition-all shadow-2xl shadow-pink-300/50 flex items-center gap-4 mx-auto disabled:opacity-50">
+                Empezar Ahora 🚀
+            </button>
+            <p id="auth-status" class="mt-4 text-[10px] text-pink-300 font-bold uppercase tracking-widest italic">Cargando sistema de seguridad...</p>
+        </section>
+
+        <!-- PANTALLA 2: ENCUESTA -->
+        <section id="view-survey" class="hidden-view max-w-2xl mx-auto w-full fade-in">
+            <div class="bg-white rounded-[3.5rem] shadow-2xl shadow-pink-200/40 border border-white overflow-hidden">
+                <div class="pink-gradient p-8 md:p-10 text-white">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-xs font-bold tracking-widest uppercase opacity-80 italic">Sistema de Gestión de Convivencia</span>
+                        <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center italic font-black">26</div>
+                    </div>
+                    <h2 class="text-3xl font-black leading-tight italic">Diagnóstico Escolar</h2>
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <div class="mb-10">
+                        <div class="flex justify-between items-end mb-4 font-black">
+                            <span class="text-pink-500 text-xl italic" id="question-label">Pregunta 1 de 10</span>
+                            <span class="text-pink-200 text-sm" id="progress-percent">10%</span>
+                        </div>
+                        <div class="h-4 w-full bg-pink-50 rounded-full p-1 border border-pink-100">
+                            <div id="progress-bar" class="h-full pink-gradient rounded-full" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <h3 id="question-text" class="text-2xl font-bold text-slate-800 mb-10 leading-snug min-h-[5rem]">Cargando...</h3>
+                    <div id="options-container" class="grid gap-4"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 3: ÉXITO -->
+        <section id="view-success" class="hidden-view text-center bg-white p-12 md:p-20 rounded-[4rem] shadow-2xl border border-pink-50 max-w-xl mx-auto fade-in">
+            <div class="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-10 text-5xl">✓</div>
+            <h2 class="text-4xl font-black mb-6 text-slate-900 leading-tight">¡Recibido!</h2>
+            <p class="text-pink-800/50 mb-10 text-xl font-bold">
+                Tus respuestas han sido procesadas correctamente en nuestra base de datos.
+            </p>
+            <div class="p-5 bg-pink-50 rounded-[2rem] border border-pink-100 mb-10 flex items-center justify-center gap-3 text-pink-600 font-black italic">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                Estado: Datos Sincronizados
+            </div>
+            <button onclick="location.reload()" class="w-full py-6 bg-slate-900 text-white rounded-[2rem] font-black text-xl hover:bg-slate-800 transition-all shadow-xl">
+                Finalizar
+            </button>
+        </section>
+
+    </main>
+
+    <footer class="py-10 text-center opacity-30">
+        <p class="text-pink-400 font-bold text-[10px] uppercase tracking-[0.2em]">EduPaz • Zárate • 5to EYA</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'edupaz-zarate-ees4';
+
+        let user = null;
+
+        const initAuth = async () => {
+            try { await signInAnonymously(auth); } catch (e) { console.error(e); }
+        };
+
+        onAuthStateChanged(auth, (u) => {
+            user = u;
+            if (user) {
+                document.getElementById('btn-start').disabled = false;
+                document.getElementById('auth-status').innerText = "Sistema de Datos Activo ✓";
+                document.getElementById('auth-status').classList.replace('text-pink-300', 'text-green-500');
+            }
+        });
+
+        initAuth();
+
+        const questions = [
+            { id: "respeto", q: "¿Cómo calificarías el nivel de respeto mutuo entre estudiantes?", options: ["Muy alto", "Bueno", "Bajo", "Muy bajo"] },
+            { id: "inclusion", q: "¿Sientes que todos los estudiantes son integrados sin importar sus diferencias?", options: ["Siempre", "A veces", "Poco", "Nunca"] },
+            { id: "apoyo", q: "¿Sientes que puedes contar con los profesores ante un problema?", options: ["Confío plenamente", "En algunos", "Rara vez", "No confío"] },
+            { id: "bullying", q: "¿Has presenciado situaciones de acoso (bullying) este mes?", options: ["Nunca", "Rara vez", "Algunas veces", "Frecuentemente"] },
+            { id: "ambiente", q: "¿Cómo es el ambiente dentro del aula durante las clases?", options: ["Tranquilo", "Aceptable", "Ruidoso", "Muy difícil"] },
+            { id: "seguridad", q: "¿Te sientes seguro/a en los recreos y espacios comunes?", options: ["Totalmente", "Mayormente", "Poco seguro", "Nada seguro"] },
+            { id: "normas", q: "¿Consideras que las normas de la escuela son claras y justas?", options: ["Muy claras", "Aceptables", "Confusas", "Injustas"] },
+            { id: "resolucion", q: "¿Cómo se suelen resolver los conflictos entre alumnos?", options: ["Diálogo", "Intervención docente", "Se ignoran", "Violencia/Gritos"] },
+            { id: "baños", q: "¿Qué opinas del estado de higiene y cuidado de los baños?", options: ["Excelente", "Bueno", "Regular", "Muy malo"] },
+            { id: "pertenencia", q: "¿Qué tan orgulloso/a te sientes de ser parte de esta escuela?", options: ["Muy orgulloso", "Satisfecho", "Indiferente", "Nada orgulloso"] }
+        ];
+
+        let currentStep = 0;
+        let answers = {};
+
+        window.toggleCredits = () => document.getElementById('credits-modal').classList.toggle('hidden-view');
+        window.startSurvey = () => { showView('view-survey'); renderQuestion(); };
+
+        función mostrarVista(viewId) {
+            documento.Selector de consultasTodos('sección principal >').para cada uno(s => s.lista de clases.agregar('vista oculta'));
+            documento.getElementById(viewId).lista de clases.eliminatorio('vista oculta');
+        }
+
+        función renderQuestion() {
+            const q = preguntas[paso real];
+            documento.getElementById('texto de pregunta').texto interno = q.q;
+            documento.getElementById('etiqueta de pregunta').texto interno = `Pregunta ${paso real + 1} de ${preguntas.longitud}`;
+            const progreso = ((paso real + 1) / preguntas.longitud) * 100;
+            documento.getElementById('barra de progreso').estilo.ancho = `${progreso}%`;
+            documento.getElementById('porcentaje de progreso').texto interno = `${Matemáticas.ronda(progreso)}%`;
+
+            const contenedor = documento.getElementById('contenedor de opciones');
+            contenedor.HTML interno = '';
+            
+            q.opciones.para cada uno(opt => {
+                const btn = documento.crearElemento('div');
+                btn.nombre de clasa = 'tarjeta de opiniones p-6 bg-rosa-50/50 redondeada-borde 3xl-2 borde-texto transparente-pizarra-700 fuente-negrita flex justificar-entre elementos-centro';
+                btn.HTML interno = `<span>${opt}</span> <span clase="texto-rosa-300">→</span>`;
+                btn.onclick = () => handleSelection(q.id, opt);
+                contenedor.appendChild(btn);
+            });
+        }
+
+        async función handleSelection(id, valor) {
+            respuestas[id] = valor;
+            si (paso real < preguntas.longitud - 1) {
+                paso real++;
+                renderQuestion();
+            } else {
+                await procesoFinalEnviar();
+            }
+        }
+
+        async función procesoFinalEnviar() {
+            const surveyView = documento.getElementById('ver encuesta');
+            surveyView.HTML interno = `<div class="p-20 text-center flex flex-col items-center"><div class="w-16 h-16 border-4 border-pink-100 border-t-pink-500 redondeado-completo animate-spin mb-6"></div><p class="font-black text-pink-600 text-xl cursiva mb-2 tracking-tighter">Guardando en base de datos...</p></div>`;
+
+            intentar {
+                await addDoc(colección(db, 'artefactos', ID de aplicación, 'público', 'datos', 'resultados'), {
+                    ...respuestas,
+                    marca de tiempo: marca de tiempo del servidor()
+                });
+                mostrarVista('ver Éxito');
+            } atrapar (e) {
+                consola.error(e);
+                surveyView.HTML interno = `<p class="text-red-500 font-bold p-10">Error al guardar datos. Intenta de nuevo.</p>`;
+            }
+        }
+    </script>
+</cuervo>
+</html</

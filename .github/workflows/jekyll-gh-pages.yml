@@ -1,0 +1,51 @@
+# Ejemplo de trabajo para crear e implementar un sitio Jekyll en GitHub Pages
+nombre: Implementar Jekyll con las dependencias de GitHub Páginas preinstaladas
+
+en:
+  # Se ejecuta en pushs que apuntan a la rama predeterminada
+ push:
+ sucursales: ["principal"]
+
+  # Le permite echar este fluido de trabajo manual desde la pestaña Acciones
+ flujo de trabajo_despacho:
+
+# Establece permisos de GITHUB_TOKEN para permitir la implementación en GitHub Pages
+permisos:
+ contenidos: leer
+ páginas: escribir
+ id-token: escribir
+
+# Permitir solo una implementación simultánea, omitiendo las ejecuciones en cola entre la ejecución en curso y la última en cola.
+# Sin embargo, NO cancela las emisiones en progreso ya que queremos permitir que se completen estas implementaciones de producción.
+concurrencia:
+ grupo: "páginas"
+ cancelación en curso: falso
+
+empleo:
+  # Construir trabajo
+ construir:
+ run-on: ubuntu-último
+ pasos:
+      - nombre: Checkout
+ usos: nombresombresombresombresombresombresombresombresombres/checkout@v4
+nombresombresombresombresombresombresombresombresombresombresombresombresombresombresombres/checkout@v4nombre:  usosConfigurar páginas
+ usos: nombresombresombresombresombresombresombresombresombres/configure-pages@v5
+nombresombresombresombresombresombresombresombresombresombresombresombresombresombresombres/configure-pages@v5nombre:  usosConstruye con Jekyll
+ usos:  conacciones/jekyll-build-pages@v1
+ con:
+ fuente:  destino. . . . . . ../ ./ . ./ ./ . . ./ ./ . ./ ./ . . . ./ ./ . ./ ./ . . ./ ./ . ./ ./ . . . ../ ./ . ./ ./ . . ./ ./ . ./ ./ . . . ./ ./ . ./ ./ . . ./ ./ . ./ ./
+destino. . . . . . ../ ./ . ./ ./ . . ./ ./ . ./ ./ . . . ./ ./ . ./ ./ . . ./ ./ . ./ ./ . . . ../ ./ . ./ ./ . . ./ ./ . ./ ./ . . . ./ ./ . ./ ./ . . ./ ./ . ./ ./: nombre/_sitio
+. . . ./_sitioname:  usosSubir artefacto
+usosSubir artefacto: acciones/upload-pages-artifact@v3
+
+  # Trabajo de implementación
+ implementar implementarimplementar implementar:
+ medio ambiente:
+ nombre: páginas de github
+ url: ${{ pasos.implementación.salidas.page_url }}
+ run-on: ubuntu-último
+ necesaria: construir
+ pasos:
+      - nombre: Implementar en páginas de GitHub
+ id: despliegue
+ usos: acciones/deploy-pages@v4
